@@ -631,7 +631,11 @@ void processCollision(GameObject& object1, GameObject& object2)
 	auto phf = lookup(typeid(object1), typeid(object2));
 	if (!phf)
 	{
-		throw UnknownCollision("Unkown collision");
+		std::string msg = "Unkown collision "; 
+		msg += typeid(object1).name();
+		msg += " ";
+		msg += typeid(object2).name();
+		throw UnknownCollision(msg);
 	}
 	phf(object1, object2);
 }
